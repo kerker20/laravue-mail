@@ -22,7 +22,7 @@ const routes = [
             {path: '/dashboard', name: 'Dashboard', component: Dashboard},
             {path: '/mails', name: 'Mails', component: Mails},
             {path: '/templates', name: 'Templates', component: Templates},
-            {path: '/settings', name: 'Settings', component: Settings}
+            {path: '/settings', name: 'Settings', component: Settings},
         ]
     },
     {

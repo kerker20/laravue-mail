@@ -5,16 +5,6 @@
                 class="w-64 absolute sm:relative bg-gray-800 shadow md:h-full flex-col justify-between hidden sm:flex"
             >
                 <div class="px-8 h-screen">
-                    <div class="h-16 w-full flex items-center">
-                        <img
-                            class="h-12 w-12"
-                            src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                            alt="Workflow"
-                        />
-                        <span class="text-blue-500 ml-5 text-xl font-bold"
-                            >Incremail</span
-                        >
-                    </div>
                     <ul class="mt-4">
                         <router-link :to="{name: 'Dashboard'}"
                             class="flex w-full justify-between text-gray-300 hover:text-gray-500 cursor-pointer items-center mb-6"
@@ -494,47 +484,16 @@
             <!-- Sidebar ends -->
             <!-- Remove class [ h-64 ] when adding a card block -->
             <div class="container mx-auto py-10 h-64 md:w-4/5 w-11/12 px-6">
-                <div class="ml-20 font-bold">
-                    <h1>Start Creating Email Newsletter</h1>
-                </div>
-                <div class="w-full h-full rounded mt-20">
-                    <div
-                        class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl"
-                    >
-                        <div class="md:flex">
-                            <div class="md:shrink-0">
-                                <img
-                                    class="h-48 w-full object-cover md:h-full md:w-48"
-                                    src="../images/mails.jpg"
-                                    alt="Man looking at item at a store"
-                                />
-                            </div>
-                            <div class="p-8">
-                                <div
-                                    class="uppercase tracking-wide text-sm text-indigo-500 font-semibold"
-                                >
-                                    Start to create your email Templates
-                                </div>
-                                <a
-                                    href="#"
-                                    class="block mt-1 text-lg leading-tight font-medium text-black hover:underline"
-                                    >Finding customers for your new business</a
-                                >
-                                <p class="mt-2 text-slate-500">
-                                    Getting a new business off the ground is a
-                                    lot of hard work. Here are five ideas you
-                                    can use to find your first customers.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="container">
+                    <UnlayerEditor ref="emailEditor" v-on:load="editorLoaded" class="bg-white shadow-md"/>
                 </div>
             </div>
         </div>
     </main>
 </template>
 <script>
-
+import UnlayerEditor from "../components/UnlayerEditor.vue";
+import sample from '../data/sample.json'
 export default {
     name: "Templates",
     data() {
@@ -542,7 +501,15 @@ export default {
             moved: true,
         };
     },
+    components: {
+        UnlayerEditor
+    },
     methods: {
+        editorLoaded() {
+            console.log('editorLoaded');
+            console.log(sample)
+            this.$refs.emailEditor.editor.loadDesign(sample);
+        },
         sidebarHandler() {
             var sideBar = document.getElementById("mobile-nav");
             sideBar.style.transform = "translateX(-260px)";
@@ -559,4 +526,12 @@ export default {
 </script>
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;1,400&family=Poppins:wght@200;400&display=swap");
+.container {
+  height: 100%;
+  margin-right: 20%;
+  margin-top: -1%;
+}
+.container {
+  display: flex;
+}
 </style>
